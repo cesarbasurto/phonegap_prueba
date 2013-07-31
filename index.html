@@ -67,75 +67,65 @@
 		    return false;
 		}
 		
-		function showAlert() {
-	        navigator.notification.alert(
-	            'You are the winner!',  // message
-	            alertDismissed,         // callback
-	            'Game Over',            // title
-	            'Done'                  // buttonName
-	        );
+		
+        
+	     function updateNotificationStatus(status) {
+	        $("#notificationStatus").empty();
+	        $("#notificationStatus").append(status).trigger("create");
+	    }
+	
+	    function getNotificationReady() {
+	        updateNotificationStatus("");   
 	    }
 	    
-	    function alertDismissed() {
-            // do something
-        }
-        
-     function updateNotificationStatus(status) {
-        $("#notificationStatus").empty();
-        $("#notificationStatus").append(status).trigger("create");
-    }
-
-    function getNotificationReady() {
-        updateNotificationStatus("");   
-    }
+	    function alertCB() {
+	        updateNotificationStatus("Alert is picked");
+	    }
     
-    function alertCB() {
-        updateNotificationStatus("Alert is picked");
-    }
-    
-    function confirmCB(button) {
-        var btnText;
-        
-        switch (button) {
-            case 1:
-                btnText = "Green";
-                break;
-            case 2:
-                btnText = "Red";
-                break;
-        }
-
-        updateNotificationStatus("Confirm: You selected the \"" + btnText +  "\" button");
-        $("#colorBox").css({"background-color": btnText})
-        $("#notificationConfirm").popup({positionTo: "window"});
-        $("#notificationConfirm").popup("open");        
-    }
-    
-    function alertNotification() {
-        navigator.notification.alert(
-              'Alert Notification'
-            , alertCB
-            , 'Title | Alert'
-            , 'Done'
-        );
-    }
-    function confirmNotification() {
-        navigator.notification.confirm(
-              'Which color do you like most?'
-            , confirmCB
-            , 'Title | Confirm'
-            , 'Green,Red'
-        );  
-    }
-    function beepNotification() {
-        navigator.notification.beep(3); 
-        updateNotificationStatus("Beep is picked");
-    }
-    function vibrateNotification() {
-        navigator.notification.vibrate(2000);
-        updateNotificationStatus("Vibrate is picked");
-    }
+	    function confirmCB(button) {
+	        var btnText;
+	        
+	        switch (button) {
+	            case 1:
+	                btnText = "Green";
+	                break;
+	            case 2:
+	                btnText = "Red";
+	                break;
+	        }
+	
+	        updateNotificationStatus("Confirm: You selected the \"" + btnText +  "\" button");
+	        $("#colorBox").css({"background-color": btnText})
+	        $("#notificationConfirm").popup({positionTo: "window"});
+	        $("#notificationConfirm").popup("open");        
+	    }
+	    
+	    function alertNotification() {
+	        navigator.notification.alert(
+	              'Alert Notification'
+	            , alertCB
+	            , 'Title | Alert'
+	            , 'Done'
+	        );
+	    }
+	    function confirmNotification() {
+	        navigator.notification.confirm(
+	              'Which color do you like most?'
+	            , confirmCB
+	            , 'Title | Confirm'
+	            , 'Green,Red'
+	        );  
+	    }
+	    function beepNotification() {
+	        navigator.notification.beep(3); 
+	        updateNotificationStatus("Beep is picked");
+	    }
+	    function vibrateNotification() {
+	        navigator.notification.vibrate(2000);
+	        updateNotificationStatus("Vibrate is picked");
+	    }
 		</script>
+		 <script type="text/javascript" charset="utf-8" src="js/accelerometer-min.js"></script>
 	</head>
 	<body>
 			<!---------------------------------- Main Page --------------------------------------->
@@ -146,6 +136,7 @@
 		    <div data-role="content">   
 		    <ul data-role="listview" data-inset="true" data-filter="true">
 		        <li><a href="#notificationCap" data-transition="slide" onclick="getNotificationReady();">Notification</a></li>
+		        <li><a href="#accelerometerMainPage" data-transition="slide" onclick="getNotificationReady();">Notification</a></li>
 		    </ul>
 		    </div>
 		</div>
@@ -183,6 +174,32 @@
 		        <div id="notificationStatus"></div>
 		    </div>          
 		</div>
-	    
+	    <div data-role="page" id="accelerometerMainPage" data-add-back-btn="true" back-btn-text="back">
+        <div data-role="header">
+            <a href="" data-rel="back" data-role="button" data-icon="arrow-l" data-theme="a" class="ui-btn-left">back</a>
+            <h1>Accelerometer</h1>
+        </div>
+        <div data-role="content">
+            <div id="accelerometerProperties" class="mesgBox ui-grid-a">
+            <div class='ui-block-a'>Acceleration X:</div><div class='ui-block-b' id="accX"></div>
+            <div class='ui-block-a'>Acceleration Y:</div><div class='ui-block-b' id="accY"></div>
+            <div class='ui-block-a'>Acceleration Z:</div><div class='ui-block-b' id="accZ"></div>
+            <div class='ui-block-a'>Timestemp:</div><div class='ui-block-b' id="accTime"></div>
+            </div>
+            <div data-role="fieldcontain">
+                <form>
+                    <label class="smFont" for="acFreq">Update frequency (in seconds)</label>
+                    <input type="range" name="acFreq" id="acFreq" value="1" min="0" max="10" step="1" data-highlight="true" />
+                </form>
+                <a href="#" id="startUpdateButton" data-role="button">Start update</a>
+                <a href="#" id="stopUpdateButton"  data-role="button">Stop update</a>
+            </div>
+        </div>
+        <div data-role="footer">
+            <div id="acelerometerStatus"></div>
+        </div>
+
+        <script type="text/javascript" charset="utf-8" src="js/accelerometer-min.js"></script>
+    </div>
 	</body>
 </html>
