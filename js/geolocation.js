@@ -21,7 +21,7 @@
                             'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
                             'Heading: '            + position.coords.heading               + '<br />' +
                             'Speed: '              + position.coords.speed                 + '<br />' +
-                            'Timestamp: '          + position.timestamp                    + '<br />
+                            'Timestamp: '          + position.timestamp                    + '<br />'
                         );
     }
 
