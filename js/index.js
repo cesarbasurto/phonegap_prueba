@@ -76,7 +76,7 @@ var app = {
     showAlert:function() {
         navigator.notification.alert(
             'You are the winner!',  // message
-            alertDismissed,         // callback
+            app.alertDismissed,         // callback
             'Game Over',            // title
             'Done'                  // buttonName
         );
