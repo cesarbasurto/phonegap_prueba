@@ -27,7 +27,27 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
+        document.addEventListener("backbutton", function() {
+            if ( $('.ui-page-active').attr('id') == 'main') {
+                this.exitAppPopup();
+            } else {
+                history.back();             
+            }
+        }, false);
     },
+    exitAppPopup:function() {
+	    navigator.notification.confirm(
+	          'Exit PhoneGap ' + device.cordova + ' Demo?'
+	        , function(button) {
+	              if (button == 2) {
+	                  navigator.app.exitApp();
+	              } 
+	          }
+	        , 'Exit'
+	        , 'No,Yes'
+	    );  
+	    return false;
+	},
     // deviceready Event Handler
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
