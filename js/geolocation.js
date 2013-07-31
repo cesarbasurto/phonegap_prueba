@@ -12,10 +12,10 @@
     // onSuccess Geolocation
     //
     function onSuccessgeo(position) {
-        var element = document.getElementById('geolocation_text');
-        element.innerHTML = 'Latitude: '  + position.coords.latitude      + '<br />' +
-                            'Longitude: ' + position.coords.longitude     + '<br />' +
-                            '<hr />'      + element.innerHTML;
+        $("#geolocation_text").empty();
+    	$("#geolocation_text").html('Latitude: '  + position.coords.latitude      + '<br />' +
+                        'Longitude: ' + position.coords.longitude     + '<br />' +
+                        '<hr />'      + element.innerHTML);
     }
 
     // clear the watch that was started earlier
