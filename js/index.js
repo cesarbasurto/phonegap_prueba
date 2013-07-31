@@ -30,7 +30,7 @@
 			 $("#main h1#appTitle").html("PhoneGap " + device.cordova + " Demo");       
 	       // addBackbuttonListener();
 	        createFileDir();
-	        alert("hello");
+	       
 			
 		}
 		
