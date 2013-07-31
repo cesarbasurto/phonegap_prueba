@@ -29,19 +29,7 @@ var app = {
         document.addEventListener('deviceready', this.onDeviceReady, false);
        
     },
-    exitAppPopup:function() {
-	    navigator.notification.confirm(
-	          'Exit PhoneGap ' + device.cordova + ' Demo?'
-	        , function(button) {
-	              if (button == 2) {
-	                  navigator.app.exitApp();
-	              } 
-	          }
-	        , 'Exit'
-	        , 'No,Yes'
-	    );  
-	    return false;
-	},
+   
     // deviceready Event Handler
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
@@ -50,6 +38,7 @@ var app = {
         app.receivedEvent('deviceready');
         document.addEventListener("backbutton", this.exitAppPopup, false);
     },
+    
     // Update DOM on a Received Event
     receivedEvent: function(id) {
     	
@@ -59,9 +48,23 @@ var app = {
 		//alert("hola");
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');
-		app.showAlert();
+		
         console.log('Received Event: ' + id);
     },
+     exitAppPopup:function() {
+     	app.showAlert();
+	    /*navigator.notification.confirm(
+	          'Exit PhoneGap ' + device.cordova + ' Demo?'
+	        , function(button) {
+	              if (button == 2) {
+	                  navigator.app.exitApp();
+	              } 
+	          }
+	        , 'Exit'
+	        , 'No,Yes'
+	    );  */
+	    return false;
+	},
     alertDismissed:function() {
             // do something
        },
