@@ -128,81 +128,45 @@
 		</script>
 		
 		<script type="text/javascript" charset="utf-8"> 
-    //*********************************************************    
-    // Geolocation Capabilities
-    //*********************************************************
-    var geolocationInt;
-    
-    function updateGeolocationStatus(status) {
-        $("#geolocationStatus").empty();
-        $("#geolocationStatus").append(status);
-    }
-    
-    function geolocationSuccess(position) {
-        $("#geolocationProperties").empty();
-        
-        $("#geolocationProperties").append(addGridRow("a", boldLabel("Latitude:")));          
-        $("#geolocationProperties").append(addGridRow("b", textFormat(position.coords.latitude)));
-        
-        $("#geolocationProperties").append(addGridRow("a", boldLabel("Longitude:")));         
-        $("#geolocationProperties").append(addGridRow("b", textFormat(position.coords.longitude)));
-        
-        $("#geolocationProperties").append(addGridRow("a", boldLabel("Altitude:")));          
-        $("#geolocationProperties").append(addGridRow("b", textFormat(position.coords.altitude)));
-        
-        $("#geolocationProperties").append(addGridRow("a", boldLabel("Accuracy:")));          
-        $("#geolocationProperties").append(addGridRow("b", textFormat(position.coords.accuracy)));
-        
-        $("#geolocationProperties").append(addGridRow("a", boldLabel("Altitude Accuracy:"))); 
-        $("#geolocationProperties").append(addGridRow("b", textFormat(position.coords.altitudeAccuracy)));
-        
-        $("#geolocationProperties").append(addGridRow("a", boldLabel("Heading:")));           
-        $("#geolocationProperties").append(addGridRow("b", textFormat(position.coords.heading)));
-        
-        $("#geolocationProperties").append(addGridRow("a", boldLabel("Speed:")));             
-        $("#geolocationProperties").append(addGridRow("b", textFormat(position.coords.speed)));
-        
-        $("#geolocationProperties").append(addGridRow("a", boldLabel("Timestamp:"))); 
-        $("#geolocationProperties").append(addGridRow("b", toDateStr(new Date(position.timestamp))));
-            
-    }
-    function geolocationError(error) {
-        $("#geolocationProperties").append(addGridRow('a', boldLabel("ERROR:")));
-        $("#geolocationProperties").append(addGridRow('b', error.message + " Code: " + error.code));
-        updateGeolocationStatus("ERROR");
-    } 
+		function getaccelerometer(){
+			
+			 startWatch();
+		}
+		function startWatch() {
 
-    function getGeolocationInfo() {
-        if ( geolocationInt != undefined ) {
-            navigator.geolocation.clearWatch(geolocationInt);
-        }
-        if ( $("#geolocFreq").val() != 1 ) {
-            $("#geolocFreq").val(1).slider("refresh");
-        }
-        
-        navigator.geolocation.getCurrentPosition(geolocationSuccess, geolocationError, {enableHighAccuracy:true, timeout:5000});
-        updateGeolocationStatus("Initialized");     
-    }
+	        // Update acceleration every 3 seconds
+	        var options = { frequency: 3000 };
+	
+	        watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
+	    }
+	
+	    // Stop watching the acceleration
+	    //
+	    function stopWatch() {
+	        if (watchID) {
+	            navigator.accelerometer.clearWatch(watchID);
+	            watchID = null;
+	        }
+	    }
+	
+	    // onSuccess: Get a snapshot of the current acceleration
+	    //
+	    function onSuccess(acceleration) {
+	        var element = document.getElementById('accelerometer');
+	
+	        element.innerHTML = 'Acceleration X: ' + acceleration.x + '<br />' +
+	                            'Acceleration Y: ' + acceleration.y + '<br />' +
+	                            'Acceleration Z: ' + acceleration.z + '<br />' +
+	                            'Timestamp: '      + acceleration.timestamp + '<br />';
+	    }
+	
+	    // onError: Failed to get the acceleration
+	    //
+	    function onError() {
+	        alert('onError!');
+	    }
+			
     
-    function updateGeolocation() {
-        if ( geolocationInt != undefined ) {
-            navigator.geolocation.clearWatch(geolocationInt);
-        }
-        
-        var uDefFreq = $("#geolocFreq").val();
-        
-        if ( uDefFreq > 0 ) {
-            // The Android 2.x simulators will not return a geolocation result unless the enableHighAccuracy option is set to true. 
-            geolocationInt = navigator.geolocation.watchPosition(geolocationSuccess, geolocationError, {enableHighAccuracy:true, timeout:5000, maximumAge: uDefFreq * 1000});
-        }
-        updateGeolocationStatus("Updating... Frequency: " + uDefFreq + " sec");
-    }
-    
-    function stopUpdateGeolocation() {
-        navigator.geolocation.clearWatch(geolocationInt);
-        geolocationInt = undefined;
-        updateGeolocationStatus("Stopped");
-    }
 </script>
 	</head>
 	<body>
@@ -214,7 +178,7 @@
 		    <div data-role="content">   
 		    <ul data-role="listview" data-inset="true" data-filter="true">
 		        <li><a href="#notificationCap" data-transition="slide" onclick="getNotificationReady();">Notification</a></li>
-		        <li><a href="#geolocationInfo" data-transition="slide" onclick="getGeolocationInfo();">Geolocation</a></li>
+		        <li><a href="#accelerometer" data-transition="slide" onclick="getaccelerometer();">accelerometer</a></li>
 		     </ul>
 		    </div>
 		</div>
@@ -252,20 +216,13 @@
 		        <div id="notificationStatus"></div>
 		    </div>          
 		</div>
-		<div data-role="page" data-add-back-btn="true" back-btn-text="back" id="geolocationInfo">
+		<div data-role="page" data-add-back-btn="true" back-btn-text="back" id="accelerometer">
 		    <div data-role="header">
-		        <h1>Geolocation</h1>
+		        <h1>accelerometer</h1>
 		    </div>
 		    <div data-role="content">
-		        <div id="geolocationProperties" class="mesgBox ui-grid-a"></div>
-		        <div data-role="fieldcontain">
-		            <form>
-		                <label class="smFont" for="geolocFreq">Update frequency (in seconds)</label>
-		                <input type="range" name="geolocFreq" id="geolocFreq" value="1" min="0" max="10" step="1" data-highlight="true"/>
-		            </form>
-		            <a href="#" data-role="button" onclick="updateGeolocation();">Start update</a>
-		            <a href="#" data-role="button" onclick="stopUpdateGeolocation();">Stop update</a>
-		        </div>
+		         <div id="accelerometer">Waiting for accelerometer...</div>
+        		 <button onclick="stopWatch();">Stop Watching</button>
 		    </div>
 		    <div data-role="footer">
 		        <div id="geolocationStatus"></div>
