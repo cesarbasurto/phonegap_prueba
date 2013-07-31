@@ -20,11 +20,15 @@
 		function showAlert() {
 	        navigator.notification.alert(
 	            'You are the winner!',  // message
-	            app.alertDismissed,         // callback
+	            alertDismissed,         // callback
 	            'Game Over',            // title
 	            'Done'                  // buttonName
 	        );
 	    }
+	    
+	    function alertDismissed() {
+            // do something
+        }
     
 		</script>
 	</head>
@@ -35,7 +39,10 @@
 		<h1>PhoneGap Demo</h1>
 		</div>
 		<div data-role="content">
+	
 		Hello, this is JQuery Mobile running in PhoneGap 2
+		
+		 <p><a href="#" onclick="showAlert(); return false;">Show Alert</a></p>
 		</div>
 		</div>
 	</body>
