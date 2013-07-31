@@ -13,7 +13,37 @@
 		//*********************************************************
 		// Wait for Cordova to Load
 		//*********************************************************
-		document.addEventListener("deviceready", onDeviceReady, false);
+		
+	    var rootDir = "file:///mnt/sdcard";
+	    var appHomeDir = "Android/data/com.ventusmoso.pg2_jqm";
+	
+	    //*********************************************************    
+	    // Prepare dir for file and storage features
+	    //*********************************************************  
+	    function createFileDir() {
+	
+	        function fsOnError(error) {
+	            alert("Cannot get to root file system. Code: " + error.message)
+	        }
+	        function dirOnError(error) {
+	            alert("Cannot create dir. Code: " + error.code)
+	        }
+	        function fsOnSuccess(fileSystem) {
+	            fileSystem.root.getDirectory(appHomeDir, {create: true, exclusive: false}, null, dirOnError);
+	        }
+	
+	        window.requestFileSystem( LocalFileSystem.PERSISTENT, 0, fsOnSuccess, fsOnError );
+	    }
+
+
+    	document.addEventListener("deviceready", onDeviceReady, false);
+    	function onDeviceReady() {
+			 $("#main h1#appTitle").html("PhoneGap " + device.cordova + " Demo");       
+	       // addBackbuttonListener();
+	        createFileDir();
+			
+		}
+		
 		document.addEventListener("backbutton", function() {
             if ( $('.ui-page-active').attr('id') == 'main') {
                 exitAppPopup();
@@ -35,9 +65,7 @@
 		    );  
 		    return false;
 		}
-		function onDeviceReady() {
-			showAlert();
-		}
+		
 		function showAlert() {
 	        navigator.notification.alert(
 	            'You are the winner!',  // message
@@ -54,17 +82,29 @@
 		</script>
 	</head>
 	<body>
-		<!---------------------------------- Main Page --------------------------------------->
-		<div data-role="page" id="main">
-		<div data-role="header">
-		<h1>PhoneGap Demo</h1>
-		</div>
-		<div data-role="content">
-	
-		Hello, this is JQuery Mobile running in PhoneGap 2
-		
-		 <p><a href="#" onclick="showAlert(); return false;">Show Alert</a></p>
-		</div>
-		</div>
+		<!---------------------------------- Main Page ---------------------------------------->
+	    <div data-role="page" id="main">
+	        <div data-role="header" data-position="fixed">
+	            <h1 id="appTitle"></h1>
+	        </div>
+	        <div data-role="content"> 
+	        <ul data-role="listview" data-inset="true" data-filter="true">
+	            <li><a href="about.html" id="goAbout">About</a></li>
+	            <li><a href="accelerometer.html" id="goAccelerometer">Accelerometer</a></li>
+	            <li><a href="camera.html" id="goCamera">Camera</a></li>
+	            <li><a href="capture.html" id="goCapture">Capture</a></li>
+	            <li><a href="compass.html" id="goCompass">Compass</a></li>
+	            <li><a href="connection.html" id="goConnection">Connection</a></li>
+	            <li><a href="contacts.html" id="goContacts">Contacts</a></li>          
+	            <li><a href="device.html" id="goDevice">Device</a></li>
+	            <li><a href="event.html" id="goEvent">Event</a></li>            
+	            <li><a href="file.html" id="goFile">File</a></li>
+	            <li><a href="geolocation.html" id="goGeolocation">Geolocation</a></li>
+	            <li><a href="media.html" id="goMedia">Media</a></li>            
+	            <li><a href="notification.html" id="goNotification">Notification</a></li>
+	            <li><a href="storage.html" id="goStorage">Storage</a></li>
+	        </ul>
+	        </div>
+	    </div> 
 	</body>
 </html>
