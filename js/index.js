@@ -29,9 +29,9 @@ var app = {
         document.addEventListener('deviceready', this.onDeviceReady, false);
         document.addEventListener("backbutton", function() {
            // if ( $('.ui-page-active').attr('id') == 'main') {
-                this.exitAppPopup();
+                app.exitAppPopup();
             //} else {
-                history.back();             
+              //  history.back();             
             //}
         }, false);
     },
