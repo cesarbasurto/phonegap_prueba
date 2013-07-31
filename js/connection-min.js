@@ -16,12 +16,10 @@ function getConnectionReady() {
     
     for (var key in states) {
         if ( key == networkState ) {
-            networkStateText += "" + states[key] + "
-";
+            networkStateText += "" + states[key] + "";
         }
         else {
-            networkStateText += "" + states[key] + "
-";
+            networkStateText += "" + states[key] + "";
         }
     } 
     
