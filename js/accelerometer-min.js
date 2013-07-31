@@ -9,7 +9,7 @@ var watchID = null;
 	        // Update acceleration every 3 seconds
 	        var options = { frequency: 3000 };
 	
-	        watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
+	        watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError_acele, options);
 	    }
 	
 	    // Stop watching the acceleration
@@ -26,7 +26,7 @@ var watchID = null;
 	    function onSuccess(acceleration) {
 	    	
 	    	$("#accelerometer_text").empty();
-	    	$("#accelerometer_text").text('Acceleration X: ' + acceleration.x + '<br/>' +
+	    	$("#accelerometer_text").html('Acceleration X: ' + acceleration.x + '<br/>' +
 		                            'Acceleration Y: ' + acceleration.y + '<br/>' +
 		                            'Acceleration Z: ' + acceleration.z + '<br/>' +
 		                            'Timestamp: '      + acceleration.timestamp + '<br/>');
@@ -35,7 +35,7 @@ var watchID = null;
 	
 	    // onError: Failed to get the acceleration
 	    //
-	    function onError() {
+	    function onError_acele() {
 	        alert('onError!');
 	    }
 			

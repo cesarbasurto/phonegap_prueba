@@ -16,6 +16,7 @@
 		<script src="js/accelerometer-min.js"></script>
 		<script src="js/capture-min.js"></script>
 		<script src="js/camara.js"></script>
+		<script src="js/geolocation.js"></script>
 	</head>
 	<body>
 			<!---------------------------------- Main Page --------------------------------------->
@@ -29,6 +30,7 @@
 		        <li><a href="#accelerometer" data-transition="slide" onclick="getaccelerometer();">Accelerometer</a></li>
 		        <li><a href="#capture" data-transition="slide">Capture Image</a></li>
 		        <li><a href="#camara" data-transition="slide" onclick="getcamara();"s>Camara</a></li>
+		        <li><a href="#gelocation" data-transition="slide" onclick="Getgeolocation();"s>Geolocation</a></li>
 		     </ul>
 		    </div>
 		</div>
@@ -102,6 +104,18 @@
 				    <button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">From Photo Album</button><br>
 				    <img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
 				    <img style="display:none;" id="largeImage" src="" />
+		    </div>
+		  
+		</div>
+		
+		<!---------------------------------- camara ------------------------------------>
+		<div data-role="page" data-add-back-btn="true" back-btn-text="back" id="gelocation">
+		    <div data-role="header">
+		        <h1>Geolocation</h1>
+		    </div>
+		    <div data-role="content">
+		               <p id="geolocation_text">Watching geolocation...</p>
+       					 <button onclick="clearWatchgeo();">Clear Watch geo</button>
 		    </div>
 		  
 		</div>
