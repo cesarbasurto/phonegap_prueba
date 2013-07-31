@@ -27,13 +27,7 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
-        document.addEventListener("backbutton", function() {
-           // if ( $('.ui-page-active').attr('id') == 'main') {
-                app.exitAppPopup();
-            //} else {
-              //  history.back();             
-            //}
-        }, false);
+       
     },
     exitAppPopup:function() {
 	    navigator.notification.confirm(
@@ -54,6 +48,7 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+        document.addEventListener("backbutton", this.exitAppPopup, false);
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
