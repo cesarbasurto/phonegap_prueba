@@ -14,7 +14,8 @@
 		<script src="js/index.js"></script>
 		<script src="js/notification.js"></script>
 		<script src="js/accelerometer-min.js"></script>
-		
+		<script src="js/capture-min.js"></script>
+		<script src="js/camara.js"></script>
 	</head>
 	<body>
 			<!---------------------------------- Main Page --------------------------------------->
@@ -27,6 +28,7 @@
 		        <li><a href="#notificationCap" data-transition="slide" onclick="getNotificationReady();">Notification</a></li>
 		        <li><a href="#accelerometer" data-transition="slide" onclick="getaccelerometer();">Accelerometer</a></li>
 		        <li><a href="#capture" data-transition="slide">Capture Image</a></li>
+		        <li><a href="#camara" data-transition="slide" onclick="getcamara();"s>Camara</a></li>
 		     </ul>
 		    </div>
 		</div>
@@ -88,6 +90,22 @@
 		    </div>
 		  
 		</div>
+		<!---------------------------------- camara ------------------------------------>
+		<div data-role="page" data-add-back-btn="true" back-btn-text="back" id="camara">
+		    <div data-role="header">
+		        <h1>Capture Image</h1>
+		    </div>
+		    <div data-role="content">
+		            <button onclick="capturePhoto();">Capture Photo</button> <br>
+				    <button onclick="capturePhotoEdit();">Capture Editable Photo</button> <br>
+				    <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>
+				    <button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">From Photo Album</button><br>
+				    <img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
+				    <img style="display:none;" id="largeImage" src="" />
+		    </div>
+		  
+		</div>
+		
 		
 		
 	</body>
