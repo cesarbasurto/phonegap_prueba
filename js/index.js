@@ -28,11 +28,11 @@ var app = {
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
         document.addEventListener("backbutton", function() {
-            if ( $('.ui-page-active').attr('id') == 'main') {
+           // if ( $('.ui-page-active').attr('id') == 'main') {
                 this.exitAppPopup();
-            } else {
+            //} else {
                 history.back();             
-            }
+            //}
         }, false);
     },
     exitAppPopup:function() {
