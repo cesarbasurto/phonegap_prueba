@@ -42,6 +42,7 @@
 		<script src="js/capture-min.js"></script>
 		<script src="js/camara.js"></script>
 		<script src="js/geolocation.js"></script>
+		<script src="js/media.js"></script>
 	</head>
 	<body>
 			<!---------------------------------- Main Page --------------------------------------->
@@ -55,7 +56,8 @@
 		        <li><a href="#accelerometer" data-transition="slide" onclick="getaccelerometer();">Accelerometer</a></li>
 		        <li><a href="#capture" data-transition="slide">Capture Image</a></li>
 		        <li><a href="#camara" data-transition="slide" onclick="getcamara();"s>Camara</a></li>
-		        <li><a href="#gelocation" data-transition="slide" onclick=";"s>Geolocation</a></li>
+		        <li><a href="#gelocation" data-transition="slide" >Geolocation</a></li>
+		        <li><a href="#media" data-transition="slide" >Media</a></li>
 		     </ul>
 		    </div>
 		</div>
@@ -143,7 +145,19 @@
 		              <button onclick="Getgeolocation();"> Watch geo</button>
        				 <button onclick="clearWatchgeo();">Clear Watch geo</button>
 		    </div>
-		  
+		</div>
+		
+		<!---------------------------------- Media ------------------------------------>
+		<div data-role="page" data-add-back-btn="true" back-btn-text="back" id="media">
+		    <div data-role="header">
+		        <h1>Media</h1>
+		    </div>
+		    <div data-role="content">
+	            <a href="#" class="btn large" onclick="playAudio('http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3');">Play Audio</a>
+		        <a href="#" class="btn large" onclick="pauseAudio();">Pause Playing Audio</a>
+		        <a href="#" class="btn large" onclick="stopAudio();">Stop Playing Audio</a>
+		        <p id="audio_position"></p>
+		    </div>
 		</div>
 		
 		
