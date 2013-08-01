@@ -27,13 +27,39 @@
     	document.addEventListener("deviceready", onDeviceReady, false);
     	
     	function onDeviceReady() {
-			 $("#main h1#appTitle").html("PhoneGap " + device.cordova + " Demo");       
-	       // addBackbuttonListener();
+			 $("#main h1#appTitle").html("PhoneGap " + device.cordova + " Demo");   
+			 alert("hello");    
+	        addBackbuttonListener();
 	        createFileDir();
 	       
 			
 		}
-		
-		
+		function addBackbuttonListener() {
+				
+				document.addEventListener("backbutton", function() {
+					alert("salir");
+					if ( $('.ui-page-active').attr('id') == 'main') {
+		                exitAppPopup();
+		            } else {
+		                history.back();             
+		            }
+		        }, false);
+		        
+		}
+	
+	    
+		function exitAppPopup() {
+		    navigator.notification.confirm(
+		          'Exit PhoneGap ' + device.cordova + ' Demo?'
+		        , function(button) {
+		              if (button == 2) {
+		                  navigator.app.exitApp();
+		              } 
+		          }
+		        , 'Exit'
+		        , 'No,Yes'
+		    );  
+		    return false;
+		}
 		
 		
