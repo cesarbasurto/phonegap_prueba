@@ -42,7 +42,21 @@
                 my_media.pause();
             }
         }
-
+		
+		function playMyAudio() {      
+		    /*check_network();
+		    if (document.getElementById('connectionstate').innerHTML === 'No network connection') {
+		        alert("Need network connection to play song from internet");
+		        return false;
+		    } */
+		    // Note: Two ways to access media file: (1) web (below)        
+		    //var src = 'http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3';
+		    //var src = 'http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3';
+		    // (2) local (on device): copy file to project's /assets folder, acces with:
+		    var src = '/android_asset/www/audio/0.mp3'; 
+		     
+		    playAudio(src);
+		}
         // Stop audio
         //
         function stopAudio() {
